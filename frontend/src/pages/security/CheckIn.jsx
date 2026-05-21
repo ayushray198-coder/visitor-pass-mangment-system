@@ -1,0 +1,267 @@
+import { useEffect, useState } from "react";
+
+import {
+  Html5QrcodeScanner
+} from "html5-qrcode";
+
+import GlassCard from "../../components/common/GlassCard";
+
+import axiosInstance from "../../api/axios";
+
+import toast from "react-hot-toast";
+
+const CheckIn = () => {
+
+  const [loading, setLoading] = useState(false);
+
+  const [manualCode, setManualCode] = useState("");
+
+  useEffect(() => {
+
+    const scanner = new Html5QrcodeScanner(
+
+      "reader",
+
+      {
+        qrbox: {
+          width: 250,
+          height: 250
+        },
+
+        fps: 5
+      },
+
+      false
+
+    );
+
+    const success = async (decodedText) => {
+
+      scanner.clear();
+
+      await verifyPass(decodedText);
+
+    };
+
+    const error = () => {};
+
+    scanner.render(success, error);
+
+    return () => {
+
+      scanner.clear().catch(() => {});
+
+    };
+
+  }, []);
+
+  const verifyPass = async (passCode) => {
+
+    try {
+
+      setLoading(true);
+
+      const token = localStorage.getItem("token");
+
+      const response = await axiosInstance.post(
+
+        "/checklog/check-in",
+
+        {
+          passCode
+        },
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+
+      );
+
+      toast.success(
+        response.data.message
+      );
+
+    } catch (error) {
+
+      toast.error(
+
+        error.response?.data?.message ||
+
+        "Check-in failed"
+
+      );
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
+  };
+
+  const handleManualSubmit = async (e) => {
+
+    e.preventDefault();
+
+    if (!manualCode) {
+
+      return toast.error(
+        "Pass code required"
+      );
+
+    }
+
+    await verifyPass(manualCode);
+
+    setManualCode("");
+
+  };
+
+  return (
+
+    <div className="
+      flex
+      flex-col
+      gap-8
+    ">
+
+      {/* header */}
+
+      <GlassCard className="
+        p-8
+        rounded-[32px]
+      ">
+
+        <h1 className="
+          text-4xl
+          font-bold
+        ">
+
+          Visitor Check-In
+
+        </h1>
+
+        <p className="
+          mt-3
+          text-slate-400
+        ">
+
+          Scan visitor QR code
+          for secure entry.
+
+        </p>
+
+      </GlassCard>
+
+      {/* qr scanner */}
+
+      <GlassCard className="
+        p-8
+        rounded-[32px]
+      ">
+
+        <div
+          id="reader"
+          className="
+            overflow-hidden
+            rounded-3xl
+          "
+        />
+
+      </GlassCard>
+
+      {/* manual */}
+
+      <GlassCard className="
+        p-8
+        rounded-[32px]
+      ">
+
+        <h2 className="
+          text-2xl
+          font-bold
+        ">
+
+          Manual Pass Check
+
+        </h2>
+
+        <p className="
+          mt-3
+          text-slate-400
+        ">
+
+          Use manual code if
+          scanner is unavailable.
+
+        </p>
+
+        <form
+          onSubmit={handleManualSubmit}
+          className="
+            mt-8
+            flex
+            flex-col
+            gap-5
+          "
+        >
+
+          <input
+            type="text"
+            placeholder="Enter Pass Code"
+            value={manualCode}
+            onChange={(e) =>
+              setManualCode(e.target.value)
+            }
+            className="
+              h-[60px]
+
+              px-5
+
+              rounded-2xl
+
+              bg-slate-900
+
+              border
+              border-white/10
+
+              outline-none
+            "
+          />
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="
+              h-[60px]
+
+              rounded-2xl
+
+              bg-indigo-600
+              hover:bg-indigo-700
+
+              transition-all
+            "
+          >
+
+            {
+              loading
+                ? "Checking..."
+                : "Verify Pass"
+            }
+
+          </button>
+
+        </form>
+
+      </GlassCard>
+
+    </div>
+
+  );
+
+};
+
+export default CheckIn;

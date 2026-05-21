@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+*{
+
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#0F172A;
+  color:#F8FAFC;
+  overflow-x:hidden;
+  font-family:Inter,sans-serif;
+}
+
+.section-space{
+  padding-top:120px;
+  padding-bottom:120px;
+  display: flex;
+  border-top: 0.5px rgb(63, 68, 73) solid;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  justify-content: space-around;
+}
