@@ -9,11 +9,11 @@ import {
   FiArrowRight
 } from "react-icons/fi";
 
-import GlassCard from "../../components/common/GlassCard";
+import GlassCard from "../../components/common/GlassCard.jsx";
 
-import SearchFilter from "../../components/common/SearchFilter";
+import SearchFilter from "../../components/common/SearchFilter.jsx";
 
-import axiosInstance from "../../api/axios";
+import axiosInstance from "../../api/axios.js";
 
 const VisitorDashboard = () => {
 

@@ -1,6 +1,6 @@
-import Container from "./Container";
+import Container from "./Container.jsx";
 
-import GlassCard from "./GlassCard";
+import GlassCard from "./GlassCard.jsx";
 
 import {
   FiMail,

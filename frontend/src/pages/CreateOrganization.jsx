@@ -6,8 +6,8 @@ import {
   FiHome
 } from "react-icons/fi";
 
-import GlassCard from "../components/common/GlassCard";
-import axiosInstance from "../api/axios";
+import GlassCard from "../components/common/GlassCard.jsx";
+import axiosInstance from "../api/axios.js";
 import toast from "react-hot-toast";
 
 const CreateOrganization = () => {

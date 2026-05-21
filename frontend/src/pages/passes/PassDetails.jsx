@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-import axiosInstance from "../../api/axios";
+import axiosInstance from "../../api/axios.js";
 
-import GlassCard from "../../components/common/GlassCard";
+import GlassCard from "../../components/common/GlassCard.jsx";
 
 import {
   FiShield,

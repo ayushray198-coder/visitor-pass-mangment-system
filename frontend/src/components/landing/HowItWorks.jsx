@@ -1,32 +1,32 @@
-import Container from "../common/Container";
+import Container from "../common/Container.jsx";
 
-import SectionTitle from "../common/SectionTitle";
+import SectionTitle from "../common/SectionTitle.jsx";
 
-import GlassCard from "../common/GlassCard";
+import GlassCard from "../common/GlassCard.jsx";
 
 const steps = [
   {
-    no:"01",
-    title:"Visitor Registration",
-    desc:"Visitor details are securely added into the system."
+    no: "01",
+    title: "Visitor Registration",
+    desc: "Visitor details are securely added into the system."
   },
 
   {
-    no:"02",
-    title:"Approval Process",
-    desc:"Employee or admin approves visitor requests."
+    no: "02",
+    title: "Approval Process",
+    desc: "Employee or admin approves visitor requests."
   },
 
   {
-    no:"03",
-    title:"Generate QR Pass",
-    desc:"Secure digital visitor pass gets generated instantly."
+    no: "03",
+    title: "Generate QR Pass",
+    desc: "Secure digital visitor pass gets generated instantly."
   },
 
   {
-    no:"04",
-    title:"Security Check-In",
-    desc:"Security team scans QR for secure entry management."
+    no: "04",
+    title: "Security Check-In",
+    desc: "Security team scans QR for secure entry management."
   }
 ];
 
@@ -49,7 +49,7 @@ const HowItWorks = () => {
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
 
           {
-            steps.map((step,index)=>(
+            steps.map((step, index) => (
               <GlassCard
                 key={index}
                 className="

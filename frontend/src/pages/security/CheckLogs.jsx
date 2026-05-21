@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import axiosInstance from "../../api/axios";
+import axiosInstance from "../../api/axios.js";
 
-import GlassCard from "../../components/common/GlassCard";
+import GlassCard from "../../components/common/GlassCard.jsx";
 
-import SearchFilter from "../../components/common/SearchFilter";
+import SearchFilter from "../../components/common/SearchFilter.jsx";
 
 import {
   FiLogIn,

@@ -1,10 +1,10 @@
-import Container from "../common/Container";
+import Container from "../common/Container.jsx";
 
-import GlassCard from "../common/GlassCard";
+import GlassCard from "../common/GlassCard.jsx";
 
-import PrimaryButton from "../common/PrimaryButton";
+import PrimaryButton from "../common/PrimaryButton.jsx";
 
-import SecondaryButton from "../common/SecondryButton";
+import SecondaryButton from "../common/SecondryButton.jsx";
 
 import {
   FiShield,

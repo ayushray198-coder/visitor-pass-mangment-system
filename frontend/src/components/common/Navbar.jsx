@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import Container from "./Container";
+import Container from "./Container.jsx";
 
 import {
   FiArrowRight,
@@ -337,9 +337,9 @@ const Navbar = () => {
           duration-300
 
           ${isOpen
-            ? "max-h-[500px] opacity-100 mt-4"
-            : "max-h-0 opacity-0"
-          }
+              ? "max-h-[500px] opacity-100 mt-4"
+              : "max-h-0 opacity-0"
+            }
           `}
         >
 

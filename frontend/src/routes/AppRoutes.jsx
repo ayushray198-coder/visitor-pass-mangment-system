@@ -8,75 +8,75 @@ import { Toaster } from "react-hot-toast";
 
 /* PUBLIC PAGES */
 
-import Home from "../pages/Home";
+import Home from "../pages/Home.jsx";
 
-import Signup from "../pages/Signup";
+import Signup from "../pages/Signup.jsx";
 
-import Login from "../pages/Login";
+import Login from "../pages/Login.jsx";
 
-import VerifyOtp from "../pages/VerifyOtp";
+import VerifyOtp from "../pages/VerifyOtp.jsx";
 
-import ForgotPassword from "../pages/ForgotPassword";
+import ForgotPassword from "../pages/ForgotPassword.jsx";
 
-import ResetPassword from "../pages/ResetPassword";
+import ResetPassword from "../pages/ResetPassword.jsx";
 
-import CreateOrganization from "../pages/CreateOrganization";
+import CreateOrganization from "../pages/CreateOrganization.jsx";
 
-import NotFound from "../pages/NotFound";
+import NotFound from "../pages/NotFound.jsx";
 
 /* LAYOUT */
 
-import DashboardLayout from "../layouts/DashboardLayout";
+import DashboardLayout from "../layouts/DashboardLayout.jsx";
 
 /* ROUTE PROTECTION */
 
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
-import RoleRoute from "./RoleRoutes";
+import RoleRoute from "./RoleRoutes.jsx";
 
 /* DASHBOARDS */
 
-import VisitorDashboard from "../pages/dashboard/VisitorDashboard";
+import VisitorDashboard from "../pages/dashboard/VisitorDashboard.jsx";
 
-import AdminDashboard from "../pages/dashboard/AdminDashboard";
+import AdminDashboard from "../pages/dashboard/AdminDashboard.jsx";
 
-import EmployeeDashboard from "../pages/dashboard/EmployeeDashboard";
+import EmployeeDashboard from "../pages/dashboard/EmployeeDashboard.jsx";
 
-import SecurityDashboard from "../pages/dashboard/SecurityDashboard";
+import SecurityDashboard from "../pages/dashboard/SecurityDashboard.jsx";
 
 /* USERS */
 
-import ManageUsers from "../pages/users/ManageUsers";
+import ManageUsers from "../pages/users/ManageUsers.jsx";
 
-import CreateStaff from "../pages/users/CreateStaff";
+import CreateStaff from "../pages/users/CreateStaff.jsx";
 
 /* VISITORS */
 
-import Visitors from "../pages/visitors/Visitors";
+import Visitors from "../pages/visitors/Visitors.jsx";
 
-import CreateVisitor from "../pages/visitors/CreateVisitors";
+import CreateVisitor from "../pages/visitors/CreateVisitors.jsx";
 
-import VisitorDetails from "../pages/visitors/VisitorsDetails";
+import VisitorDetails from "../pages/visitors/VisitorsDetails.jsx";
 
 /* PASSES */
 
-import Passes from "../pages/passes/Passes";
+import Passes from "../pages/passes/Passes.jsx";
 
-import PassDetails from "../pages/passes/PassDetails";
+import PassDetails from "../pages/passes/PassDetails.jsx";
 
 /* APPOINTMENTS */
 
-import Appointments from "../pages/appoinments/Appointments";
+import Appointments from "../pages/appoinments/Appointments.jsx";
 
-import CreateAppointment from "../pages/appoinments/CreateAppointment";
+import CreateAppointment from "../pages/appoinments/CreateAppointment.jsx";
 
 /* SECURITY */
 
-import CheckIn from "../pages/security/CheckIn";
+import CheckIn from "../pages/security/CheckIn.jsx";
 
-import CheckOut from "../pages/security/CheckOut";
+import CheckOut from "../pages/security/CheckOut.jsx";
 
-import CheckLogs from "../pages/security/CheckLogs";
+import CheckLogs from "../pages/security/CheckLogs.jsx";
 
 const AppRoutes = () => {
 

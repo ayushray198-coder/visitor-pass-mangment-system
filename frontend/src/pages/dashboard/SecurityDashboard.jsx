@@ -8,9 +8,9 @@ import {
   FiShield
 } from "react-icons/fi";
 
-import GlassCard from "../../components/common/GlassCard";
+import GlassCard from "../../components/common/GlassCard.jsx";
 
-import SearchFilter from "../../components/common/SearchFilter";
+import SearchFilter from "../../components/common/SearchFilter.jsx";
 
 const SecurityDashboard = () => {
 

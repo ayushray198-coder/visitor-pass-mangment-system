@@ -2,11 +2,11 @@ import { useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import axiosInstance from "../api/axios";
+import axiosInstance from "../api/axios.js";
 
 import toast from "react-hot-toast";
 
-import GlassCard from "../components/common/GlassCard";
+import GlassCard from "../components/common/GlassCard.jsx";
 
 const ResetPassword = () => {
 
