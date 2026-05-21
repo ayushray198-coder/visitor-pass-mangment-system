@@ -1,8 +1,8 @@
-import Container from "../common/Container.jsx";
+import Container from "../common/Container"
 
-import SectionTitle from "../common/SectionTitle.jsx";
+import SectionTitle from "../common/SectionTitle";
 
-import GlassCard from "../common/GlassCard.jsx";
+import GlassCard from "../common/GlassCard";
 
 import {
   FiShield,
