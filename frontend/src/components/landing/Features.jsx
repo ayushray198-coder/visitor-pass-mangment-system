@@ -1,4 +1,4 @@
-import Container from "../common/Container.jsx";
+import Container from "../common/Container.jsx"
 
 import SectionTitle from "../common/SectionTitle.jsx";
 
