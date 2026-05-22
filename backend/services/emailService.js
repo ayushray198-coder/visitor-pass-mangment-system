@@ -6,9 +6,10 @@ const getTransporter = () => {
 
     host: "smtp.gmail.com",
 
-    secure: false,
+    port:465,
+    secure:true,
 
-    port: 587,
+    family: 4,
 
     auth: {
 
