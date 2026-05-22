@@ -4,22 +4,21 @@ const getTransporter = () => {
 
   return nodemailer.createTransport({
 
-    host: "smtp.gmail.com",
+  host: "smtp-relay.brevo.com",
 
-    port:465,
-    secure:true,
+  port: 587,
 
-    family: 4,
+  secure: false,
 
-    auth: {
+  auth: {
 
-      user: process.env.EMAIL_USER,
+    user: process.env.EMAIL_USER,
 
-      pass: process.env.EMAIL_PASS
+    pass: process.env.EMAIL_PASS
 
-    }
+  }
 
-  });
+});
 
 };
 
