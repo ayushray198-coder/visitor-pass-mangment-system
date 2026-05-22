@@ -15,12 +15,16 @@ const app = express()
 
 app.use(express.json())
 
-app.use(cors({
-    origin: ["http://localhost:5173",
-        process.env.CLIENT_URL
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://visitor-pass-mangment-system.vercel.app"
     ],
+
     credentials: true
-}))
+  })
+)
 
 app.use("/uploads", express.static(
     path.join(process.cwd(), "uploads")
