@@ -6,9 +6,9 @@ const getTransporter = () => {
 
     service: "gmail",
 
-    secure: true,
+    secure: false,
 
-    port: 465,
+    port: 587,
 
     auth: {
 
@@ -33,7 +33,7 @@ export const sendEmailOTP = async (
 
     const transporter =
       getTransporter();
-      
+
     await transporter.verify();
 
     console.log("Email server ready");
