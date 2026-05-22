@@ -1,28 +1,6 @@
-import nodemailer from "nodemailer";
+import axios from "axios";
 
-const getTransporter = () => {
-
-  return nodemailer.createTransport({
-
-  host: "smtp-relay.brevo.com",
-
-  port: 587,
-
-  secure: false,
-
-  auth: {
-
-    user: process.env.EMAIL_USER,
-
-    pass: process.env.EMAIL_PASS
-
-  }
-
-});
-
-};
-
-
+/* OTP EMAIL */
 
 export const sendEmailOTP = async (
   email,
@@ -31,45 +9,66 @@ export const sendEmailOTP = async (
 
   try {
 
-    const transporter =
-      getTransporter();
+    await axios.post(
 
-    await transporter.verify();
+      "https://api.brevo.com/v3/smtp/email",
 
-    console.log("Email server ready");
+      {
 
-    await transporter.sendMail({
+        sender: {
 
-      from:
-        `"Visitor Pass" <${process.env.EMAIL_USER}>`,
+          name: "Visitor Pass",
 
-      to: email,
+          email: process.env.EMAIL_USER
+        },
 
-      subject: "OTP Verification",
+        to: [
 
-      html: `
+          {
+            email
+          }
+        ],
 
-        <h2>
-          Your OTP is:
-          ${otp}
-        </h2>
+        subject: "OTP Verification",
 
-      `
+        htmlContent: `
 
-    });
+          <div>
+            <h2>Your OTP is:</h2>
+
+            <h1>${otp}</h1>
+          </div>
+
+        `
+      },
+
+      {
+
+        headers: {
+
+          "api-key":
+            process.env.BREVO_API_KEY,
+
+          "Content-Type":
+            "application/json"
+        }
+      }
+    );
+
+    console.log("OTP Email Sent");
 
   } catch (error) {
 
     console.log(
-      "Email Error:",
-      error
+      "Brevo Error:",
+      error.response?.data || error.message
     );
 
   }
 
 };
 
-
+/* COMMON EMAIL */
 
 export const sendEmail = async ({
 
@@ -77,40 +76,57 @@ export const sendEmail = async ({
 
   subject,
 
-  html,
-
-  attachments = []
+  html
 
 }) => {
 
   try {
 
-    const transporter =
-      getTransporter();
+    await axios.post(
 
-    await transporter.verify();
+      "https://api.brevo.com/v3/smtp/email",
 
-    console.log("Email server ready");
-    await transporter.sendMail({
+      {
 
-      from:
-        `"Visitor Pass" <${process.env.EMAIL_USER}>`,
+        sender: {
 
-      to,
+          name: "Visitor Pass",
 
-      subject,
+          email: process.env.EMAIL_USER
+        },
 
-      html,
+        to: [
 
-      attachments
+          {
+            email: to
+          }
+        ],
 
-    });
+        subject,
+
+        htmlContent: html
+      },
+
+      {
+
+        headers: {
+
+          "api-key":
+            process.env.BREVO_API_KEY,
+
+          "Content-Type":
+            "application/json"
+        }
+      }
+    );
+
+    console.log("Email Sent");
 
   } catch (error) {
 
     console.log(
-      "Email Error:",
-      error
+      "Brevo Error:",
+      error.response?.data || error.message
     );
 
   }
@@ -120,8 +136,7 @@ export const sendEmail = async ({
 
 
 export const sendPassEmail = async ({
-  to,
-  pdfPath
+  to
 }) => {
 
   await sendEmail({
@@ -131,21 +146,10 @@ export const sendPassEmail = async ({
     subject: "Visitor Pass",
 
     html: `
-      <h2>
-        Your Visitor Pass
-      </h2>
-    `,
 
-    attachments: [
+      <h2>Your Visitor Pass</h2>
 
-      {
-        filename:
-          "visitor-pass.pdf",
-
-        path: pdfPath
-      }
-
-    ]
+    `
 
   });
 
