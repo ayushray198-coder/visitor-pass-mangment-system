@@ -17,11 +17,7 @@ app.use(express.json())
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://visitor-pass-mangment-system.vercel.app"
-    ],
-
+    origin: true,
     credentials: true
   })
 )
