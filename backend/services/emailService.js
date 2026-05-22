@@ -22,7 +22,7 @@ const getTransporter = () => {
 
 };
 
-/* OTP EMAIL */
+
 
 export const sendEmailOTP = async (
   email,
@@ -33,6 +33,10 @@ export const sendEmailOTP = async (
 
     const transporter =
       getTransporter();
+      
+    await transporter.verify();
+
+    console.log("Email server ready");
 
     await transporter.sendMail({
 
@@ -58,14 +62,14 @@ export const sendEmailOTP = async (
 
     console.log(
       "Email Error:",
-      error.message
+      error
     );
 
   }
 
 };
 
-/* COMMON EMAIL */
+
 
 export const sendEmail = async ({
 
@@ -84,6 +88,9 @@ export const sendEmail = async ({
     const transporter =
       getTransporter();
 
+    await transporter.verify();
+
+    console.log("Email server ready");
     await transporter.sendMail({
 
       from:
@@ -103,14 +110,14 @@ export const sendEmail = async ({
 
     console.log(
       "Email Error:",
-      error.message
+      error
     );
 
   }
 
 };
 
-/* PASS EMAIL */
+
 
 export const sendPassEmail = async ({
   to,
