@@ -19,7 +19,7 @@ export const sendEmailOTP = async (
 
           name: "Visitor Pass",
 
-          email: process.env.EMAIL_USER
+          email: "ayush564rai@gmail.com"
         },
 
         to: [
@@ -92,7 +92,7 @@ export const sendEmail = async ({
 
           name: "Visitor Pass",
 
-          email: process.env.EMAIL_USER
+          email: "ayush564rai@gmail.com"
         },
 
         to: [
