@@ -23,7 +23,7 @@ export const signup = async (req, res) => {
 
     email = validator.normalizeEmail(email || "");
 
-  
+
     if (!name || !email || !password || !phone) {
       return res.status(400).json({ message: "All fields required" });
     }
@@ -32,7 +32,7 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "Invalid email" });
     }
 
-  
+
     const exist = await User.findOne({ email });
     if (exist) {
       return res.status(400).json({ message: "User already exists" });
@@ -45,15 +45,15 @@ export const signup = async (req, res) => {
 
     // photo wala logic 
     let photo = ""
-    if (req.file){
-      photo = `/uploads/${req.file.filename}`
+    if (req.file) {
+      photo = req.file.path
     }
 
     // verify se pehle temp. data store krne ke liye
     await Otp.create({
       name,
       email,
-      password, 
+      password,
       phone,
       photo,
 
@@ -91,7 +91,7 @@ export const verifyOtp = async (req, res) => {
       return res.status(400).json({ message: "Email & OTP required" });
     }
 
-    
+
     const record = await Otp.findOne({ email }).sort({ createdAt: -1 });
 
     if (!record) {
@@ -112,11 +112,11 @@ export const verifyOtp = async (req, res) => {
       });
     }
 
-    
+
     const hashedPassword = await bcrypt.hash(record.password, 10);
 
 
-    
+
     const user = await User.create({
       name: record.name,
       email: record.email,
@@ -126,12 +126,12 @@ export const verifyOtp = async (req, res) => {
       photo: record.photo
     });
 
-    
+
     await Otp.deleteMany({ email });
 
     const token = jwt.sign(
       {
-        id:user.id,
+        id: user.id,
         role: user.role
       },
       process.env.JWT_SECRET,
@@ -143,7 +143,7 @@ export const verifyOtp = async (req, res) => {
     res.json({
       success: true,
       message: "Account created successfully",
-      data:{
+      data: {
         id: user._id,
         name: user.name,
         email: user.email,
@@ -165,7 +165,7 @@ export const login = async (req, res) => {
 
     email = validator.normalizeEmail(email || "");
 
-    
+
     if (!validator.isEmail(email) || validator.isEmpty(password || "")) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
@@ -182,12 +182,12 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    if(!user.isActive) {
-      return res.status(403).json({message:"Account is deactivated"})
+    if (!user.isActive) {
+      return res.status(403).json({ message: "Account is deactivated" })
     }
 
     const token = jwt.sign(
-      { id: user._id, role:user.role},
+      { id: user._id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
@@ -210,43 +210,43 @@ export const login = async (req, res) => {
 };
 
 
-export const forgotPassword = async (req , res) =>{
+export const forgotPassword = async (req, res) => {
   try {
-    
-    const {email} = req.body
 
-    if(!email) {
-      return res.status(400).json({message: "Email is required"})
+    const { email } = req.body
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" })
     }
 
-    const user = await User.findOne({email})
+    const user = await User.findOne({ email })
 
     if (!user) {
-      return res.status(404).json({message: "User not found"})
+      return res.status(404).json({ message: "User not found" })
     }
 
     const resetToken = crypto.randomBytes(32).toString("hex")
 
     const hashedToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex")
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex")
 
     user.resetPasswordToken = hashedToken
 
     user.resetPasswordExpire = Date.now() + 15 * 60 * 1000
-    
+
     await user.save()
 
     const resetUrl = `http://localhost:5173/reset-password/${resetToken}`
 
-   await sendEmail({
+    await sendEmail({
 
-  to: user.email,
+      to: user.email,
 
-  subject: "Reset Your Password",
+      subject: "Reset Your Password",
 
-  html: `
+      html: `
 
     <div
       style="
@@ -290,40 +290,40 @@ export const forgotPassword = async (req , res) =>{
 
   `
 
-});
+    });
 
     res.json({
       success: true,
       message: "password reset link generated",
-      
+
     })
-    
+
 
 
   } catch (error) {
-    res.status(500).json({message: error.message})
+    res.status(500).json({ message: error.message })
   }
 }
 
 
-export const resetPassword = async (req ,res) => {
+export const resetPassword = async (req, res) => {
   try {
-    const {token} = req.params
+    const { token } = req.params
 
-    const { password} = req.body
+    const { password } = req.body
 
-    if(!password) {
-      return res.status(400).json({message: "password required"})
+    if (!password) {
+      return res.status(400).json({ message: "password required" })
     }
 
-   const hashedToken = crypto
-    .createHash("sha256")
-    .update(token)
-    .digest("hex")
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(token)
+      .digest("hex")
 
 
     const user = await User.findOne({
-      resetPasswordToken:hashedToken,
+      resetPasswordToken: hashedToken,
 
       resetPasswordExpire: {
         $gt: Date.now()
@@ -331,7 +331,7 @@ export const resetPassword = async (req ,res) => {
     })
 
     if (!user) {
-      return res.status(400).json({message: "Invalid or expired token"})
+      return res.status(400).json({ message: "Invalid or expired token" })
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
@@ -341,13 +341,13 @@ export const resetPassword = async (req ,res) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined
 
-    await user.save() 
+    await user.save()
 
     res.json({
       success: true,
       message: "Password reset successful"
     })
   } catch (error) {
-    res.status(500).json({message: error.message})
+    res.status(500).json({ message: error.message })
   }
 }
