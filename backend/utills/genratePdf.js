@@ -1,7 +1,8 @@
 import PDFDocument from "pdfkit"
 import fs from "fs"
 import path from "path"
-import { resolve } from "dns"
+import { start } from "repl"
+
 
 
 export const generateVisitorPdf = async ({ visitorName, passCode, qrCode, photo }) => {
@@ -12,7 +13,11 @@ export const generateVisitorPdf = async ({ visitorName, passCode, qrCode, photo 
     const filePath = path.join("uploads", fileName)
     const doc = new PDFDocument({ size: "A4", margin: 40 })
 
-    doc.pipe(fs.createWriteStream(filePath))
+    // doc.pipe(fs.createWriteStream(filePath))
+
+    const stream = fs.createWriteStream(filePath)
+
+    doc.pipe(stream)
 
     doc.roundedRect(20, 20, 555, 800, 30)
         .fill("#0f172a")
@@ -78,7 +83,7 @@ export const generateVisitorPdf = async ({ visitorName, passCode, qrCode, photo 
 
     await new Promise((resolve) => {
 
-        doc.on("finish", resolve)
+        stream.on("finish", resolve)
         doc.end()
     })
 
