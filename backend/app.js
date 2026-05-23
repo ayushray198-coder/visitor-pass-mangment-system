@@ -17,13 +17,14 @@ app.use(express.json())
 
 app.use(
   cors({
-    origin: true,
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true
   })
 )
 
 app.use("/uploads", express.static(
-    path.join(process.cwd(), "uploads")
+  path.join(process.cwd(), "uploads")
 ))
 
 app.use("/api/auth", authRoutes)
