@@ -15,14 +15,57 @@ const app = express()
 
 app.use(express.json())
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true
-  })
-)
+app.use(cors({
 
+  origin: function (origin, callback) {
+
+    const allowedOrigins = [
+
+      "http://localhost:5173",
+
+      "https://visitor-pass-mangment-system.vercel.app"
+
+    ];
+
+    /* ALLOW LOCALHOST + ALL VERCEL PREVIEW URLS */
+
+    if (
+
+      !origin ||
+
+      allowedOrigins.includes(origin) ||
+
+      origin.endsWith(".vercel.app")
+
+    ) {
+
+      callback(null, true);
+
+    } else {
+
+      callback(
+
+        new Error("Not allowed by CORS")
+
+      );
+
+    }
+
+  },
+
+  methods: [
+
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE"
+
+  ],
+
+  credentials: true
+
+}));
 app.use("/uploads", express.static(
   path.join(process.cwd(), "uploads")
 ))
