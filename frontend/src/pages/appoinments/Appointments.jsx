@@ -111,6 +111,8 @@ const Appointments = () => {
 
       try {
 
+        /* UPDATE STATUS */
+
         const response =
 
           await axiosInstance.patch(
@@ -134,44 +136,49 @@ const Appointments = () => {
           status === "approved"
         ) {
 
-          try {
+          await axiosInstance.post(
 
-            await axiosInstance.post(
+            "/pass/generate",
 
-              "/pass/generate",
+            {
+              appointmentId
+            },
 
-              {
-                appointmentId
-              },
-
-              {
-                headers: {
-                  Authorization:
-                    `Bearer ${token}`
-                }
+            {
+              headers: {
+                Authorization:
+                  `Bearer ${token}`
               }
+            }
 
-            );
-
-          } catch (passError) {
-
-            console.log(passError);
-
-            toast.error(
-              "Pass generation failed"
-            );
-
-          }
+          );
 
         }
+
+        /* GET UPDATED APPOINTMENTS */
+
+        const updatedAppointments =
+
+          await axiosInstance.get(
+
+            "/appointment",
+
+            {
+              headers: {
+                Authorization:
+                  `Bearer ${token}`
+              }
+            }
+
+          );
+
+        setAppointments(
+          updatedAppointments.data.data
+        );
 
         toast.success(
           response.data.message
         );
-
-        /* REFRESH APPOINTMENTS */
-
-        await fetchAppointments();
 
       } catch (error) {
 
@@ -393,8 +400,6 @@ const Appointments = () => {
               "
             >
 
-              {/* TOP */}
-
               <div className="
                 flex
                 flex-col
@@ -442,9 +447,7 @@ const Appointments = () => {
 
                 {/* STATUS */}
 
-                <div className="
-                  flex
-                ">
+                <div className="flex">
 
                   {
                     appointment.status
@@ -453,18 +456,13 @@ const Appointments = () => {
                       <div className="
                         h-[45px]
                         px-5
-
                         rounded-xl
-
                         bg-emerald-500/10
-
                         border
                         border-emerald-500/20
-
                         flex
                         items-center
                         gap-2
-
                         text-emerald-400
                       ">
 
@@ -484,18 +482,13 @@ const Appointments = () => {
                       <div className="
                         h-[45px]
                         px-5
-
                         rounded-xl
-
                         bg-red-500/10
-
                         border
                         border-red-500/20
-
                         flex
                         items-center
                         gap-2
-
                         text-red-400
                       ">
 
@@ -515,18 +508,13 @@ const Appointments = () => {
                       <div className="
                         h-[45px]
                         px-5
-
                         rounded-xl
-
                         bg-yellow-500/10
-
                         border
                         border-yellow-500/20
-
                         flex
                         items-center
                         gap-2
-
                         text-yellow-400
                       ">
 
@@ -598,7 +586,7 @@ const Appointments = () => {
 
               </div>
 
-              {/* ACTIONS */}
+              {/* ACTION BUTTONS */}
 
               {
                 (
@@ -622,8 +610,6 @@ const Appointments = () => {
                     gap-4
                   ">
 
-                    {/* APPROVE */}
-
                     <button
 
                       onClick={() =>
@@ -635,16 +621,11 @@ const Appointments = () => {
 
                       className="
                         h-[55px]
-
                         px-8
-
                         rounded-2xl
-
                         bg-emerald-600
                         hover:bg-emerald-700
-
                         transition-all
-
                         text-white
                       "
                     >
@@ -652,8 +633,6 @@ const Appointments = () => {
                       Approve
 
                     </button>
-
-                    {/* REJECT */}
 
                     <button
 
@@ -666,16 +645,11 @@ const Appointments = () => {
 
                       className="
                         h-[55px]
-
                         px-8
-
                         rounded-2xl
-
                         bg-red-600
                         hover:bg-red-700
-
                         transition-all
-
                         text-white
                       "
                     >
