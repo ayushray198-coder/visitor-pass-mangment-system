@@ -237,11 +237,10 @@ const PassDetails = () => {
         ">
 
           <img
-
             src={
               pass?.visitorId?.photo
 
-                ? `${import.meta.env.VITE_API_URL.replace("/api", "")}${pass.visitorId.photo}`
+                ? `${import.meta.env.VITE_API_URL.replace("/api", "")}/${pass.visitorId.photo}`
 
                 : "/default-avatar.png"
             }
