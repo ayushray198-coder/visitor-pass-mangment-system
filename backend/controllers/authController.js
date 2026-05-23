@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import crypto from "crypto"
 import { sendEmailOTP, sendEmail } from "../services/emailService.js";
+import console from "console";
 
 
 // otp genrate krne ke liye 
@@ -45,6 +46,8 @@ export const signup = async (req, res) => {
 
     // photo wala logic 
     let photo = ""
+    console.log(req.file);
+
     if (req.file) {
       photo = req.file.path
     }
