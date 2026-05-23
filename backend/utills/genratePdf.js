@@ -8,7 +8,7 @@ export const generateVisitorPdf = async ({ visitorName, passCode , qrCode, photo
 
     const fileName = `${passCode}.pdf`
 
-    const filePath = path.join("upload", fileName)
+    const filePath = path.join("uploads", fileName)
     const doc = new PDFDocument( { size: "A4", margin: 40})
 
     doc.pipe(fs.createWriteStream(filePath))
