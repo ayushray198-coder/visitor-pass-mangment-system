@@ -34,8 +34,18 @@ export const genaratePass = async (req, res) => {
         const existsPass = await Pass.findOne({ appointmentId })
 
         if (existsPass) {
-            return res.status(400).json({ message: "Pass already genrated" })
-        }
+
+    return res.status(200).json({
+
+        success: true,
+
+        message: "Pass already generated",
+
+        data: existsPass
+
+    });
+
+}
 
         const passCode = crypto.randomBytes(6).toString("hex");
 
