@@ -133,7 +133,8 @@ export const getPasses = async (req , res) => {
 export const getSinglePass = async(req ,res) => {
     try {
         const pass = await Pass.findById(req.params.id)
-        .populate("visitorId", "name email photo")
+        .populate("visitorId", "name email phone photo")
+        .populate("organizationId","name")
         .populate("appointmentId")
 
         if(!pass){
