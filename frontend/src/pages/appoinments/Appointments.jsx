@@ -53,6 +53,8 @@ const Appointments = () => {
 
       try {
 
+        setLoading(true);
+
         const response =
 
           await axiosInstance.get(
@@ -132,38 +134,79 @@ const Appointments = () => {
 
           );
 
+        /* INSTANT UI UPDATE */
+
+        setAppointments((prev) =>
+
+          prev.map((appointment) =>
+
+            appointment._id === appointmentId
+
+              ? {
+                  ...appointment,
+                  status
+                }
+
+              : appointment
+
+          )
+
+        );
+
         /* GENERATE PASS */
 
         if (
           status === "approved"
         ) {
 
-          await axiosInstance.post(
+          try {
 
-            "/pass/generate",
+            await axiosInstance.post(
 
-            {
-              appointmentId
-            },
+              "/pass/generate",
 
-            {
-              headers: {
-                Authorization:
-                  `Bearer ${token}`
+              {
+                appointmentId
+              },
+
+              {
+                headers: {
+                  Authorization:
+                    `Bearer ${token}`
+                }
               }
-            }
+
+            );
+
+            toast.success(
+
+              "Appointment Approved & Pass Generated"
+
+            );
+
+          } catch (passError) {
+
+            console.log(passError);
+
+            toast.success(
+              "Appointment Approved"
+            );
+
+            toast.error(
+              "Pass generation failed"
+            );
+
+          }
+
+        } else {
+
+          toast.success(
+
+            response.data.message
 
           );
 
         }
-
-        toast.success(
-
-          response.data.message
-
-        );
-
-        fetchAppointments();
 
       } catch (error) {
 
