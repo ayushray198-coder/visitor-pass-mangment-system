@@ -9,7 +9,7 @@ const passSchema = new mongoose.Schema({
 
     visitorId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Visitor",
+        ref: "User",
         required: true
     },
 
