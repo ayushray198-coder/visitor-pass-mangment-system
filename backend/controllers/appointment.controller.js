@@ -71,8 +71,8 @@ export const updateAppointmentStatus = async (req, res) => {
         }
 
         const appoinment = await Appointment.findOne({
-             appointmentId,
-           
+            _id: appointmentId,
+            organizationId: req.user.organizationId
         })
 
         if (!appoinment) {

@@ -71,18 +71,12 @@ const Appointments = () => {
           );
 
         setAppointments(
-
           response.data.data
-
         );
 
       } catch (error) {
 
-        console.log(
-
-          error.response?.data
-
-        );
+        console.log(error);
 
         toast.error(
 
@@ -134,25 +128,6 @@ const Appointments = () => {
 
           );
 
-        /* INSTANT UI UPDATE */
-
-        setAppointments((prev) =>
-
-          prev.map((appointment) =>
-
-            appointment._id === appointmentId
-
-              ? {
-                  ...appointment,
-                  status
-                }
-
-              : appointment
-
-          )
-
-        );
-
         /* GENERATE PASS */
 
         if (
@@ -178,19 +153,9 @@ const Appointments = () => {
 
             );
 
-            toast.success(
-
-              "Appointment Approved & Pass Generated"
-
-            );
-
           } catch (passError) {
 
             console.log(passError);
-
-            toast.success(
-              "Appointment Approved"
-            );
 
             toast.error(
               "Pass generation failed"
@@ -198,15 +163,15 @@ const Appointments = () => {
 
           }
 
-        } else {
-
-          toast.success(
-
-            response.data.message
-
-          );
-
         }
+
+        toast.success(
+          response.data.message
+        );
+
+        /* REFRESH APPOINTMENTS */
+
+        await fetchAppointments();
 
       } catch (error) {
 
