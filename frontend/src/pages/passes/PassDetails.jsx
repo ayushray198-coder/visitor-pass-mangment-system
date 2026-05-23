@@ -118,7 +118,7 @@ const PassDetails = () => {
       gap-8
     ">
 
-      {/* header */}
+      {/* HEADER */}
 
       <GlassCard className="
         p-8
@@ -162,6 +162,8 @@ const PassDetails = () => {
 
           </div>
 
+          {/* STATUS */}
+
           <div className="
             h-[55px]
 
@@ -184,7 +186,10 @@ const PassDetails = () => {
 
             <FiShield />
 
-            {pass.status}
+            {
+              pass?.appointmentId?.status ||
+              "approved"
+            }
 
           </div>
 
@@ -192,7 +197,7 @@ const PassDetails = () => {
 
       </GlassCard>
 
-      {/* pass cord */}
+      {/* PASS CARD */}
 
       <GlassCard className="
         p-8
@@ -204,7 +209,7 @@ const PassDetails = () => {
         relative
       ">
 
-        {/* bg effect */}
+        {/* BG EFFECT */}
 
         <div className="
           absolute
@@ -232,7 +237,14 @@ const PassDetails = () => {
         ">
 
           <img
-            src={`${import.meta.env.VITE_API_URL.replace("/api", "")}${pass.visitorId?.photo}`}
+
+            src={
+              pass?.visitorId?.photo
+
+                ? `${import.meta.env.VITE_API_URL.replace("/api", "")}${pass.visitorId.photo}`
+
+                : "/default-avatar.png"
+            }
 
             alt="Visitor"
 
@@ -267,7 +279,7 @@ const PassDetails = () => {
           gap-10
         ">
 
-          {/* left*/}
+          {/* LEFT */}
 
           <div className="
             flex-1
@@ -278,7 +290,7 @@ const PassDetails = () => {
             gap-8
           ">
 
-            {/* visitor */}
+            {/* VISITOR */}
 
             <div>
 
@@ -309,7 +321,7 @@ const PassDetails = () => {
               ">
 
                 {
-                  pass.visitorId?.name ||
+                  pass?.visitorId?.name ||
                   "Visitor"
                 }
 
@@ -317,7 +329,7 @@ const PassDetails = () => {
 
             </div>
 
-            {/* email */}
+            {/* EMAIL */}
 
             <div>
 
@@ -345,7 +357,7 @@ const PassDetails = () => {
               ">
 
                 {
-                  pass.visitorId?.email ||
+                  pass?.visitorId?.email ||
                   "Not Available"
                 }
 
@@ -353,7 +365,7 @@ const PassDetails = () => {
 
             </div>
 
-            {/* phone */}
+            {/* PHONE */}
 
             <div>
 
@@ -379,7 +391,7 @@ const PassDetails = () => {
               ">
 
                 {
-                  pass.visitorId?.phone ||
+                  pass?.visitorId?.phone ||
                   "Not Available"
                 }
 
@@ -387,7 +399,7 @@ const PassDetails = () => {
 
             </div>
 
-            {/* organizatioin */}
+            {/* ORGANIZATION */}
 
             <div>
 
@@ -414,15 +426,15 @@ const PassDetails = () => {
               ">
 
                 {
-                  pass.organizationId?.name ||
-                  "VisitFlow"
+                  pass?.organizationId?.name ||
+                  "Organization"
                 }
 
               </h2>
 
             </div>
 
-            {/* pass code */}
+            {/* PASS CODE */}
 
             <div>
 
@@ -457,14 +469,14 @@ const PassDetails = () => {
               ">
 
                 {
-                  pass.passCode
+                  pass?.passCode
                 }
 
               </h2>
 
             </div>
 
-            {/* validity */}
+            {/* VISIT DATE */}
 
             <div>
 
@@ -496,7 +508,9 @@ const PassDetails = () => {
 
                 {
                   new Date(
-                    pass.validTill
+
+                    pass?.appointmentId?.visitDate
+
                   ).toLocaleString()
                 }
 
@@ -506,7 +520,7 @@ const PassDetails = () => {
 
           </div>
 
-          {/* right */}
+          {/* RIGHT */}
 
           <div className="
             w-full
@@ -522,7 +536,7 @@ const PassDetails = () => {
             lg:pt-36
           ">
 
-            {/* qr */}
+            {/* QR */}
 
             <div className="
               p-5
@@ -535,7 +549,8 @@ const PassDetails = () => {
             ">
 
               <img
-                src={pass.qrCode}
+
+                src={pass?.qrCode}
 
                 alt="QR Code"
 
@@ -549,7 +564,7 @@ const PassDetails = () => {
 
             </div>
 
-            {/* status */}
+            {/* ACTIVE */}
 
             <div className="
               w-full

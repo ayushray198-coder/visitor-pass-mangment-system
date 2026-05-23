@@ -66,6 +66,19 @@ export const genaratePass = async (req, res) => {
             organizationId: appoitnment.organizationId
         })
 
+        const populatedPass = await Pass.findById(pass._id)
+        .populate(
+            "visitorId",
+            "name email phone photo"
+        )
+        .populate(
+            "organizationId",
+            "name"
+        )
+        .populate(
+            "appointmentId"
+        )
+
         const visitor = await User.findById(
             appoitnment.visitor
         )
@@ -84,7 +97,7 @@ export const genaratePass = async (req, res) => {
         res.status(201).json({
             success: true,
             data: {
-                pass,
+                pass: populatedPass,
                 pdfPath
             }
         })
