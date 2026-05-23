@@ -6,6 +6,7 @@ const otpSchema = new mongoose.Schema({
     email: String,
     phone: String,
     password: String,
+    photo:String,
     orgName: String,
     otp: String,
     expiresAt: Date
