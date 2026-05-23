@@ -1,4 +1,6 @@
 import axios from "axios";
+import fs from "fs"
+
 
 /* OTP EMAIL */
 
@@ -76,7 +78,9 @@ export const sendEmail = async ({
 
   subject,
 
-  html
+  html,
+
+  attachments = []
 
 }) => {
 
@@ -104,7 +108,9 @@ export const sendEmail = async ({
 
         subject,
 
-        htmlContent: html
+        htmlContent: html,
+
+        attachment: attachments
       },
 
       {
@@ -136,7 +142,8 @@ export const sendEmail = async ({
 
 
 export const sendPassEmail = async ({
-  to
+  to,
+  pdfPath
 }) => {
 
   await sendEmail({
@@ -149,8 +156,20 @@ export const sendPassEmail = async ({
 
       <h2>Your Visitor Pass</h2>
 
-    `
 
+
+    `,
+    attachments: [
+      {
+        name: "visitor-Pass.pdf",
+
+        content: fs.readFileSync(pdfPath,
+          {
+            encoding: "base64"
+          }
+        )
+      }
+    ]
   });
 
 };

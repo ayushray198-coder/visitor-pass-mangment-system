@@ -47,11 +47,11 @@ export const signup = async (req, res) => {
     // photo wala logic 
     let photo = ""
 
-
     if (req.file) {
       photo = req.file.path
     }
     console.log(photo)
+    
     // verify se pehle temp. data store krne ke liye
     await Otp.create({
       name,
