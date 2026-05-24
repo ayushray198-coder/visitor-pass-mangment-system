@@ -1,5 +1,11 @@
 # Visitor Pass Managment System 
 
+
+# live demo
+- Frontend .Vercel. :  https://visitor-pass-mangment-system.vercel.app
+
+- Backend .Render. :   https://visitor-pass-mangment-system.onrender.com
+
 This is a full-stack Visitor pass managment system built using the MERN stack.
 
 
@@ -94,6 +100,47 @@ This project helped me understand how defrent parts of MERN application work tog
 - Search and Filter 
 
 
+
+
+# ScreenShots 
+
+## Landing page
+
+![Landing Page](./screenshots/landing-page.png)
+
+
+## Signup & Login
+
+![Signup](./screenshots/signup-page.png)
+![Login](./screenshots/login-page.png)
+
+
+## Dashboard
+
+1[Dashboard](./screenshots/dashboard-page.png)
+
+
+## Appointments 
+
+![Appointments](./screenshots/appoinments-page.png)
+
+
+# Pass Management 
+
+![Passes](./screenshots/passes-page.png)
+
+
+## Digital Pass
+
+![Digital Pass](./screenshots/digital-pass-page.png)
+
+
+## QR Scanner
+
+1[Scanner](./screenshots/scanner-page.jpg)
+
+## Check Logs
+![Check Logs](./screenshots/logs-page.png)
 
 
 # Teck Stack 
