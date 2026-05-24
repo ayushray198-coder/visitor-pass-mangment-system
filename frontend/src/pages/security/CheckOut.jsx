@@ -28,7 +28,15 @@ const CheckOut = () => {
           height: 250
         },
 
-        fps: 5
+        fps: 10,
+
+        rememberLastUsedCamera: false,
+
+        videoConstraints: {
+          facingMode: {
+            ideal: "enviroment"
+          }
+        }
       },
 
       false
@@ -124,11 +132,16 @@ const CheckOut = () => {
     <div className="
       flex
       flex-col
-      gap-8
+      gap-6
+
+      w-full
+      max-w-5xl
+      mx-auto
     ">
 
       <GlassCard className="
-        p-8
+        p-5
+        md:p-8
         rounded-[32px]
       ">
 
@@ -154,7 +167,8 @@ const CheckOut = () => {
       </GlassCard>
 
       <GlassCard className="
-        p-8
+        p-5
+        md:p-8
         rounded-[32px]
       ">
 

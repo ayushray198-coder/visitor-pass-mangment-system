@@ -28,7 +28,14 @@ const CheckIn = () => {
           height: 250
         },
 
-        fps: 5
+        fps: 10,
+
+        rememberLastUsedCamera: false,
+        videoConstraints:{
+          facingMode:{
+            ideal:"enviroment"
+          }
+        }
       },
 
       false
@@ -43,13 +50,13 @@ const CheckIn = () => {
 
     };
 
-    const error = () => {};
+    const error = () => { };
 
     scanner.render(success, error);
 
     return () => {
 
-      scanner.clear().catch(() => {});
+      scanner.clear().catch(() => { });
 
     };
 
@@ -124,18 +131,23 @@ const CheckIn = () => {
     <div className="
       flex
       flex-col
-      gap-8
+      gap-6
+
+      w-full
+      max-w-5xl
     ">
 
       {/* header */}
 
       <GlassCard className="
-        p-8
+        p-5
+        md:p-8
         rounded-[32px]
       ">
 
         <h1 className="
-          text-4xl
+          text-3xl
+          md:text-4xl
           font-bold
         ">
 
@@ -158,7 +170,8 @@ const CheckIn = () => {
       {/* qr scanner */}
 
       <GlassCard className="
-        p-8
+        p-5
+        md:p-8
         rounded-[32px]
       ">
 
@@ -167,6 +180,7 @@ const CheckIn = () => {
           className="
             overflow-hidden
             rounded-3xl
+            w-full
           "
         />
 
@@ -175,7 +189,8 @@ const CheckIn = () => {
       {/* manual */}
 
       <GlassCard className="
-        p-8
+        p-5
+        md:p-8
         rounded-[32px]
       ">
 
