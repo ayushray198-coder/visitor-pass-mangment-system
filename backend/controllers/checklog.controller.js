@@ -14,6 +14,7 @@ export const checkInVisitor = async (req , res) =>{
             passCode,
             organizationId: req.user.organizationId
         })
+        .populate("visitorId")
 
         if (!pass) {
             return res.status(404).json({message: "pass not found"})
@@ -29,7 +30,7 @@ export const checkInVisitor = async (req , res) =>{
 
         const log = await CheckLog.create({
             passId: pass._id,
-            visitorId: pass.visitorId,
+            visitorId: pass.visitorId._id,
             checkInTime: new Date(),
             checkedInBy: req.user._id,
             organizationId: req.user.organizationId
@@ -59,6 +60,7 @@ export const checkOutVisitor = async (req ,res) =>{
             passCode,
             organizationId: req.user.organizationId
         })
+        .populate("visitorId")
 
         if (!pass) {
             return res.status(404).json({message: "pass not found"})
