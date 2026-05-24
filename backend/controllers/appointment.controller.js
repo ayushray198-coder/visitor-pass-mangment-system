@@ -42,10 +42,14 @@ export const getAppointment = async (req, res) => {
             data = await Appointment.find({
                 organizationId: req.user.organizationId
             })
-            .populate(
-                "visitor",
-                "name email"
-            )
+            .populate({
+                path: "visitor",
+                select: "name email"
+            })
+            .populate({
+                path: "organizationId",
+                select: "name"
+            })
         }
 
         res.json({
