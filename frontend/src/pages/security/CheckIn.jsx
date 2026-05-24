@@ -42,10 +42,13 @@ const CheckIn = () => {
 
             async (decodedText) => {
 
+              toast.success(decodedText)
+              const passCode= decodedText.split("/").pop()
+
               await html5QrCode.stop();
 
               await verifyPass(
-                decodedText
+                passCode
               );
 
             },
