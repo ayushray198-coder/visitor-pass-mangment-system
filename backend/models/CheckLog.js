@@ -4,13 +4,13 @@ const checkLogSchema = new mongoose.Schema({
 
     passId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "pass",
+        ref: "Pass",
         required: true
     },
 
     visitorId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Visitor",
+        ref: "User",
         required:true
     },
 
@@ -29,7 +29,7 @@ const checkLogSchema = new mongoose.Schema({
 
     checkedOutBy:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user"
+        ref: "User"
     },
 
     organizationId:{
