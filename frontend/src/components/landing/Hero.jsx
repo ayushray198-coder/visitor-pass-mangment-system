@@ -6,6 +6,8 @@ import PrimaryButton from "../common/PrimaryButton.jsx";
 
 import SecondaryButton from "../common/SecondryButton.jsx";
 
+import visitorPassImg from "../../assets/visitor-pass.png"
+
 import {
   FiShield,
   FiCheckCircle,
@@ -329,240 +331,59 @@ const Hero = () => {
             "
           >
 
-            <GlassCard
+            <div
               className="
-              relative
+             relative
 
-              w-full
-              max-w-[320px]
-              sm:max-w-[380px]
-              lg:max-w-[430px]
+             w-full
+             max-w-[320px]
+             sm:max-w-[380px]
+             lg:max-w-[430px]
 
-              min-h-[620px]
-              sm:h-[700px]
-              lg:h-[760px]
+             transition-all
+             duration-500
 
-              border-[10px]
-              border-slate-800
-
-              bg-[#0B1120]
-
-              p-4
-              sm:p-5
-
-              shadow-[0_20px_80px_rgba(0,0,0,0.45)]
-
-              hover:-translate-y-3
-
-              transition-all
-              duration-500
-              "
+            hover:-translate-y-2
+            "
             >
 
-              {/* PHONE TOP */}
+              {/* glow */}
 
               <div
                 className="
-                w-28
-                sm:w-32
+                absolute
+                inset-0
 
-                h-6
-                sm:h-7
+               rounded-[40px]
 
-                bg-black
+                border
+               border-cyan-400/20
 
-                rounded-b-3xl
+               shadow-[0_0_35px_rgba(34,211,238,0.18)]
 
-                mx-auto
-                "
-              ></div>
+              pointer-events-none
+              "
+              />
 
-              {/* SCREEN */}
+              {/* image */}
 
-              <div className="mt-5 sm:mt-6 ">
+              <img
+                src={visitorPassImg}
 
-                <GlassCard
-                  className="
-                  p-5
-                  sm:p-6
+                alt="Visitor Pass"
 
-                  h-full
+                className="
+               relative
+                z-10
 
-                  bg-white/[0.02]
-                  "
-                >
+               w-full
+               h-auto
 
-                  {/* TOP */}
+                 object-contain
+               "
+              />
 
-                  <div
-                    className="
-                    flex
-                    items-center
-                    justify-between
-
-                    mb-8
-                    "
-                  >
-
-                    <div>
-
-                      <p
-                        className="
-                        text-slate-500
-                        text-xs
-                        sm:text-sm
-                        "
-                      >
-
-                        Visitor Pass
-
-                      </p>
-
-                      <h3
-                        className="
-                        text-xl
-                        sm:text-2xl
-
-                        font-bold
-                        mt-1
-                        "
-                      >
-
-                        Digital Access
-
-                      </h3>
-
-                    </div>
-
-                    <div
-                      className="
-                      w-11
-                      h-11
-                      sm:w-12
-                      sm:h-12
-
-                      rounded-2xl
-
-                      bg-cyan-500/10
-
-                      border
-                      border-cyan-400/20
-
-                      flex
-                      items-center
-                      justify-center
-
-                      text-cyan-400
-                      "
-                    >
-
-                      <FiCheckCircle />
-
-                    </div>
-
-                  </div>
-
-                  {/* QR */}
-
-                  <div
-                    className="
-                    h-[320px]
-                    sm:h-[420px]
-
-                    rounded-[28px]
-
-                    border
-                    border-dashed
-                    border-slate-700
-
-                    bg-[#020617]
-
-                    flex
-                    items-center
-                    justify-center
-
-                    text-center
-                    text-slate-500
-
-                    text-base
-                    sm:text-lg
-                    "
-                  >
-
-                    Visitor Pass Preview
-
-                  </div>
-
-                  {/* DETAILS */}
-
-                  <div className="mt-8 space-y-5">
-
-                    {
-                      [
-                        {
-                          icon: <FiUsers />,
-                          title: "Visitor Name"
-                        },
-
-                        {
-                          icon: <FiTrendingUp />,
-                          title: "Meeting Time"
-                        },
-
-                        {
-                          icon: <FiShield />,
-                          title: "Host Employee"
-                        }
-                      ].map((item, index) => (
-
-                        <div
-                          key={index}
-                          className="
-                          flex
-                          items-center
-                          justify-between
-
-                          pb-4
-
-                          border-b
-                          border-white/5
-                          "
-                        >
-
-                          <div className="flex items-center gap-3">
-
-                            <span className="text-cyan-400">
-
-                              {item.icon}
-
-                            </span>
-
-                            <span className="text-slate-400">
-
-                              {item.title}
-
-                            </span>
-
-                          </div>
-
-                          <span className="text-white">
-
-                            ********
-
-                          </span>
-
-                        </div>
-
-                      ))
-                    }
-
-                  </div>
-
-                </GlassCard>
-
-              </div>
-
-            </GlassCard>
+            </div>
 
           </div>
 
