@@ -1,8 +1,11 @@
 # Visitor Pass Managment System 
 
-This is a full-stack Visitor pass mangment system built using the MERN stack.
+This is a full-stack Visitor pass managment system built using the MERN stack.
 
-I built this project to learn how real world full stack application work. i wanted to move beyond small CRUD projects and build something bigger that includes authentication ,dashboard, QR codes , pdf generation, and role based access.
+
+I built this project to improve my frontend and backend skills and to understand how real-world MERN applications work together.
+
+While building this project, I learned authentication, role-based access control, QR code generation, PDF generation, dashboard management, and API integration.
 
 
 this system helps organizations manage visitors, appoinments, passes, and security verification in a more organized way.
@@ -16,7 +19,7 @@ i built this project to improve my frontend and backend skills.
 
 while working on it , i learned: 
 
-- How authication works 
+- How authentication works 
 - How to protect routes
 - How role based access works
 - How to connect frontend and backend 
@@ -26,7 +29,7 @@ while working on it , i learned:
 
 
 
-This project helped me underdtand how defrent parts of MERN application work together.
+This project helped me understand how defrent parts of MERN application work together.
 
 
 
@@ -34,7 +37,7 @@ This project helped me underdtand how defrent parts of MERN application work tog
 
 # features
 
-## Authenticatioin 
+## Authentication 
 
 - Signip and Login
 - OTP Verification 

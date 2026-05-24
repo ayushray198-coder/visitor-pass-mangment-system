@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 
-import {
-  Html5QrcodeScanner
-} from "html5-qrcode";
+import { Html5Qrcode } from "html5-qrcode";
 
 import GlassCard from "../../components/common/GlassCard.jsx";
 
@@ -18,114 +16,137 @@ const CheckOut = () => {
 
   useEffect(() => {
 
-    const scanner = new Html5QrcodeScanner(
+    const html5QrCode =
+      new Html5Qrcode("reader");
 
-      "reader",
+    const startScanner =
+      async () => {
 
-      {
-        qrbox: {
-          width: 250,
-          height: 250
-        },
+        try {
 
-        fps: 10,
+          await html5QrCode.start(
 
-        rememberLastUsedCamera: false,
+            {
+              facingMode:
+                "environment"
+            },
 
-        videoConstraints: {
-          facingMode: {
-            ideal: "enviroment"
-          }
+            {
+              fps: 10,
+
+              qrbox: {
+                width: 250,
+                height: 250
+              }
+            },
+
+            async (decodedText) => {
+
+              await html5QrCode.stop();
+
+              await verifyPass(
+                decodedText
+              );
+
+            },
+
+            () => { }
+
+          );
+
+        } catch (error) {
+
+          console.log(error);
+
         }
-      },
 
-      false
+      };
 
-    );
-
-    const success = async (decodedText) => {
-
-      scanner.clear();
-
-      await verifyPass(decodedText);
-
-    };
-
-    const error = () => { };
-
-    scanner.render(success, error);
+    startScanner();
 
     return () => {
 
-      scanner.clear().catch(() => { });
+      html5QrCode
+        .stop()
+        .catch(() => { });
 
     };
 
   }, []);
 
-  const verifyPass = async (passCode) => {
+  const verifyPass =
+    async (passCode) => {
 
-    try {
+      try {
 
-      setLoading(true);
+        setLoading(true);
 
-      const token = localStorage.getItem("token");
+        const token =
+          localStorage.getItem(
+            "token"
+          );
 
-      const response = await axiosInstance.post(
+        const response =
+          await axiosInstance.post(
 
-        "/checklog/check-out",
+            "/checklog/check-out",
 
-        {
-          passCode
-        },
+            {
+              passCode
+            },
 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
+            {
+              headers: {
+                Authorization:
+                  `Bearer ${token}`
+              }
+            }
 
+          );
+
+        toast.success(
+          response.data.message
+        );
+
+      } catch (error) {
+
+        toast.error(
+
+          error.response?.data
+            ?.message ||
+
+          "Check-out failed"
+
+        );
+
+      } finally {
+
+        setLoading(false);
+
+      }
+
+    };
+
+  const handleManualSubmit =
+    async (e) => {
+
+      e.preventDefault();
+
+      if (!manualCode) {
+
+        return toast.error(
+          "Pass code required"
+        );
+
+      }
+
+      await verifyPass(
+        manualCode
       );
 
-      toast.success(
-        response.data.message
-      );
+      setManualCode("");
 
-    } catch (error) {
-
-      toast.error(
-
-        error.response?.data?.message ||
-
-        "Check-out failed"
-
-      );
-
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  };
-
-  const handleManualSubmit = async (e) => {
-
-    e.preventDefault();
-
-    if (!manualCode) {
-
-      return toast.error(
-        "Pass code required"
-      );
-
-    }
-
-    await verifyPass(manualCode);
-
-    setManualCode("");
-
-  };
+    };
 
   return (
 
@@ -139,14 +160,19 @@ const CheckOut = () => {
       mx-auto
     ">
 
+      {/* header */}
+
       <GlassCard className="
         p-5
         md:p-8
+
         rounded-[32px]
       ">
 
         <h1 className="
-          text-4xl
+          text-3xl
+          md:text-4xl
+
           font-bold
         ">
 
@@ -166,9 +192,12 @@ const CheckOut = () => {
 
       </GlassCard>
 
+      {/* scanner */}
+
       <GlassCard className="
         p-5
         md:p-8
+
         rounded-[32px]
       ">
 
@@ -177,13 +206,18 @@ const CheckOut = () => {
           className="
             overflow-hidden
             rounded-3xl
+            w-full
           "
         />
 
       </GlassCard>
 
+      {/* manual */}
+
       <GlassCard className="
-        p-8
+        p-5
+        md:p-8
+
         rounded-[32px]
       ">
 
@@ -207,22 +241,35 @@ const CheckOut = () => {
         </p>
 
         <form
-          onSubmit={handleManualSubmit}
+          onSubmit={
+            handleManualSubmit
+          }
+
           className="
             mt-8
+
             flex
             flex-col
+
             gap-5
           "
         >
 
           <input
             type="text"
-            placeholder="Enter Pass Code"
+
+            placeholder="
+            Enter Pass Code
+            "
+
             value={manualCode}
+
             onChange={(e) =>
-              setManualCode(e.target.value)
+              setManualCode(
+                e.target.value
+              )
             }
+
             className="
               h-[60px]
 
@@ -241,7 +288,9 @@ const CheckOut = () => {
 
           <button
             type="submit"
+
             disabled={loading}
+
             className="
               h-[60px]
 
