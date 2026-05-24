@@ -1,25 +1,27 @@
-import Visitor from "../models/Visitor.js"
-import Appointment from "../models/Appointment.js"
-import  CheckLog from "../models/CheckLog.js"
 
-export const getDashboardAnalytics = async (req , res) => {
+import Appointment from "../models/Appointment.js"
+import CheckLog from "../models/CheckLog.js"
+
+export const getDashboardAnalytics = async (req, res) => {
 
     try {
-       const orgId = req.user.organizationId
+        const orgId = req.user.organizationId
 
         const [totalVisitors, totalAppointments, totalCheckIns, pendingAppointments] = await Promise.all([
 
-            Visitor.countDocuments({organizationId: orgId}),
-            Appointment.countDocuments({organizationId:orgId}),
-            CheckLog.countDocuments({organizationId: orgId}),
+            CheckLog.distinct("visitorId", {
+                organizationId: orgId
+            }).then((visitors) => visitors.length),
+            Appointment.countDocuments({ organizationId: orgId }),
+            CheckLog.countDocuments({ organizationId: orgId }),
             Appointment.countDocuments({
-                organizationId:orgId,
+                organizationId: orgId,
                 status: "pending"
             })
         ])
         res.json({
             success: true,
-            data:{
+            data: {
                 totalVisitors,
                 totalAppointments,
                 totalCheckIns,
@@ -27,6 +29,6 @@ export const getDashboardAnalytics = async (req , res) => {
             }
         })
     } catch (error) {
-        res.status(500).json({message: error.message})
+        res.status(500).json({ message: error.message })
     }
 }
