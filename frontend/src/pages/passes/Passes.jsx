@@ -140,7 +140,7 @@ const Passes = () => {
 
       </GlassCard>
 
-      {/* SEARCH + FILTER */}
+      {/* SEARCH FILTER */}
 
       <GlassCard className="
         p-6
@@ -157,28 +157,42 @@ const Passes = () => {
 
           setFilter={setFilter}
 
-          placeholder="Search passes..."
+          placeholder="
+          Search passes...
+          "
 
           options={[
 
             {
-              label: "All Status",
-              value: "all"
+              label:
+                "All Status",
+
+              value:
+                "all"
             },
 
             {
-              label: "Active",
-              value: "active"
+              label:
+                "Active",
+
+              value:
+                "active"
             },
 
             {
-              label: "Used",
-              value: "used"
+              label:
+                "Used",
+
+              value:
+                "used"
             },
 
             {
-              label: "Expired",
-              value: "expired"
+              label:
+                "Expired",
+
+              value:
+                "expired"
             }
 
           ]}
@@ -190,7 +204,7 @@ const Passes = () => {
       {/* PASSES */}
 
       <GlassCard className="
-        p-8
+        p-6
         rounded-[32px]
       ">
 
@@ -218,112 +232,50 @@ const Passes = () => {
           ) : (
 
             <div className="
-              grid
-              grid-cols-1
-              md:grid-cols-2
-              xl:grid-cols-3
-
-              gap-6
-              items-stretch
+              flex
+              flex-col
+              gap-4
             ">
 
               {
-                filteredPasses.map((pass) => (
+                filteredPasses.map(
+                  (pass) => (
 
-                  <GlassCard
-                    key={pass._id}
+                    <div
+                      key={pass._id}
 
-                    className="
-                      h-full
+                      className="
+                        flex
+                        flex-col
+                        lg:flex-row
 
-                      flex
-                      flex-col
+                        lg:items-center
+                        justify-between
 
-                      p-6
+                        gap-5
 
-                      rounded-[30px]
+                        p-5
 
-                      relative
+                        rounded-[24px]
 
-                      overflow-hidden
+                        border
+                        border-white/10
 
-                      hover:-translate-y-2
-                      hover:border-indigo-500/20
+                        bg-white/[0.03]
+                      "
+                    >
 
-                      transition-all
-                      duration-300
-                    "
-                  >
+                      {/* LEFT */}
 
-                    {/* STATUS */}
-
-                    <div className="
-                      absolute
-                      top-5
-                      right-5
-                    ">
-
-                      <div className={`
-                        px-4
-                        py-2
-
-                        rounded-2xl
-
-                        text-sm
-                        font-semibold
-
-                        ${
-                          pass.status ===
-                          "active"
-
-                          ? "bg-emerald-500/10 text-emerald-400"
-
-                          : pass.status ===
-                          "used"
-
-                          ? "bg-cyan-500/10 text-cyan-400"
-
-                          : "bg-red-500/10 text-red-400"
-                        }
-                      `}>
-
-                        {pass.status}
-
-                      </div>
-
-                    </div>
-
-                    {/* PHOTO */}
-
-                    <div className="
-                      flex
-                      items-center
-                      gap-5
-                    ">
-
-                      <img
-                        src={`http://localhost:4141${pass.visitorId?.photo}`}
-
-                        alt="Visitor"
-
-                        className="
-                          w-20
-                          h-20
-
-                          rounded-3xl
-
-                          object-cover
-
-                          border
-                          border-white/10
-                        "
-                      />
-
-                      <div className="min-w-0">
+                      <div className="
+                        flex
+                        flex-col
+                        gap-3
+                      ">
 
                         <h2 className="
-                          text-2xl
-                          font-bold
+                          text-xl
+                          font-semibold
                         ">
 
                           {
@@ -333,9 +285,8 @@ const Passes = () => {
                         </h2>
 
                         <p className="
-                          mt-1
+                          text-sm
                           text-slate-400
-                          truncate
                         ">
 
                           {
@@ -344,112 +295,145 @@ const Passes = () => {
 
                         </p>
 
-                      </div>
+                        <div className="
+                          flex
+                          flex-wrap
+                          gap-6
 
-                    </div>
-
-                    {/* PASS INFO */}
-
-                    <div className="
-                      mt-8
-
-                      flex
-                      flex-col
-
-                      gap-5
-                    ">
-
-                      <div>
-
-                        <p className="
-                          text-slate-400
-                          text-sm
-                        ">
-
-                          Pass Code
-
-                        </p>
-
-                        <h3 className="
                           mt-2
-
-                          text-xl
-                          font-bold
-
-                          tracking-widest
-                          uppercase
-
-                          text-indigo-400
                         ">
 
-                          {
-                            pass.passCode
-                          }
+                          <div>
 
-                        </h3>
+                            <p className="
+                              text-xs
+                              text-slate-500
+                            ">
+
+                              Pass Code
+
+                            </p>
+
+                            <h3 className="
+                              mt-1
+
+                              font-semibold
+
+                              text-indigo-400
+
+                              tracking-wider
+                            ">
+
+                              {
+                                pass.passCode
+                              }
+
+                            </h3>
+
+                          </div>
+
+                          <div>
+
+                            <p className="
+                              text-xs
+                              text-slate-500
+                            ">
+
+                              Valid Till
+
+                            </p>
+
+                            <h3 className="
+                              mt-1
+                              font-semibold
+                            ">
+
+                              {
+                                new Date(
+                                  pass.validTill
+                                ).toLocaleString()
+                              }
+
+                            </h3>
+
+                          </div>
+
+                        </div>
 
                       </div>
 
-                      <div>
+                      {/* RIGHT */}
 
-                        <p className="
-                          text-slate-400
-                          text-sm
-                        ">
-
-                          Valid Till
-
-                        </p>
-
-                        <h3 className="
-                          mt-2
-                          text-lg
-                          font-semibold
-                        ">
-
-                          {
-                            new Date(
-                              pass.validTill
-                            ).toLocaleString()
-                          }
-
-                        </h3>
-
-                      </div>
-
-                    </div>
-
-                    {/* BUTTON */}
-
-                    <Link
-                      to={`/dashboard/passes/${pass._id}`}
-
-                      className="
-                        mt-auto
-                        pt-8
-
-                        h-[52px]
-
-                        rounded-2xl
-
-                        bg-indigo-600
-                        hover:bg-indigo-700
-
-                        transition-all
-
+                      <div className="
                         flex
                         items-center
-                        justify-center
-                      "
-                    >
+                        gap-4
+                        flex-wrap
+                      ">
 
-                      View Digital Pass
+                        <div className={`
 
-                    </Link>
+                          px-4
+                          py-2
 
-                  </GlassCard>
+                          rounded-xl
 
-                ))
+                          text-sm
+                          font-semibold
+
+                          ${
+                            pass.status ===
+                            "active"
+
+                            ? "bg-emerald-500/10 text-emerald-400"
+
+                            : pass.status ===
+                            "used"
+
+                            ? "bg-cyan-500/10 text-cyan-400"
+
+                            : "bg-red-500/10 text-red-400"
+                          }
+
+                        `}>
+
+                          {
+                            pass.status
+                          }
+
+                        </div>
+
+                        <Link
+                          to={`/dashboard/passes/${pass._id}`}
+
+                          className="
+                            h-[46px]
+
+                            px-5
+
+                            rounded-xl
+
+                            bg-indigo-600
+                            hover:bg-indigo-700
+
+                            transition-all
+
+                            flex
+                            items-center
+                            justify-center
+                          "
+                        >
+
+                          View Pass
+
+                        </Link>
+
+                      </div>
+
+                    </div>
+
+                  )
+                )
               }
 
             </div>
