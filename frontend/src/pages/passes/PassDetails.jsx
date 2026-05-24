@@ -110,18 +110,22 @@ const PassDetails = () => {
   return (
 
     <div className="
+      w-full
       max-w-5xl
       mx-auto
 
       flex
       flex-col
-      gap-8
+      gap-5
+
+      px-4
     ">
 
-      {/* HEADER */}
+      {/* header */}
 
       <GlassCard className="
-        p-8
+        p-5
+        md:p-8
         rounded-[32px]
       ">
 
@@ -200,8 +204,8 @@ const PassDetails = () => {
       {/* PASS CARD */}
 
       <GlassCard className="
-        p-8
-        sm:p-10
+        p-5
+        sm:p-7
 
         rounded-[36px]
 
@@ -230,8 +234,8 @@ const PassDetails = () => {
 
         <div className="
           absolute
-          top-8
-          right-8
+          top-5
+          right-5
 
           z-20
         ">
@@ -273,7 +277,7 @@ const PassDetails = () => {
           flex-col
           lg:flex-row
 
-          gap-10
+          gap-6
         ">
 
           {/* LEFT */}
@@ -530,7 +534,7 @@ const PassDetails = () => {
 
             gap-8
 
-            lg:pt-36
+    
           ">
 
             {/* QR */}
@@ -552,8 +556,11 @@ const PassDetails = () => {
                 alt="QR Code"
 
                 className="
-                  w-[220px]
-                  h-[220px]
+                  w-[180px]
+                  h-[180px]
+
+                  sm:w-[220px]
+                  sm:h-[220px]
 
                   object-cover
                 "

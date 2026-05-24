@@ -167,7 +167,9 @@ const Signup = () => {
       justify-center
 
       px-6
-      py-24
+      py-y
+
+      overflow-hidden
     ">
 
       <GlassCard
@@ -175,7 +177,7 @@ const Signup = () => {
         w-full
         max-w-162.5
 
-        overflow-y-auto
+        
 
         px-8
         sm:px-14
@@ -216,8 +218,8 @@ const Signup = () => {
         </div>
 
         <h2 className="
-          text-4xl
-          sm:text-5xl
+          text-3xl
+          sm:text-4xl
 
           font-bold
 
@@ -251,14 +253,14 @@ const Signup = () => {
         <form
           onSubmit={handleSubmit}
           className="
-          mt-14
+          mt-8
 
           w-full
 
           flex
           flex-col
 
-          gap-7
+          gap-5
         "
         >
 
