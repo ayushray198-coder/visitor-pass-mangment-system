@@ -49,11 +49,7 @@ export const genaratePass = async (req, res) => {
 
         const passCode = crypto.randomBytes(6).toString("hex");
 
-        const qrPayload = JSON.stringify({
-            appointmentId: appoitnment._id,
-            visitorId: appoitnment.visitor,
-            passCode
-        })
+        const qrPayload = passCode
 
         const qrCode = await QRCode.toDataURL(qrPayload)
 
