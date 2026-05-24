@@ -449,7 +449,7 @@ const Appointments = () => {
 
                       {
                         appointment
-                          .visitorId?.name ||
+                          .visitor?.name ||
 
                         "Visitor"
                       }
@@ -475,7 +475,7 @@ const Appointments = () => {
 
                       {
                         appointment
-                          .visitorId?.email ||
+                          .visitor?.email ||
 
                         "No Email"
                       }

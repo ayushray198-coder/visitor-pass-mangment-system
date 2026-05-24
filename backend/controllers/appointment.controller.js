@@ -44,10 +44,13 @@ export const getAppointment = async (req, res) => {
             })
             .populate({
                 path: "visitor",
+
+                model: "User",
                 select: "name email"
             })
             .populate({
                 path: "organizationId",
+                model: "Organization",
                 select: "name"
             })
         }
