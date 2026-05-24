@@ -533,7 +533,7 @@ const PassDetails = () => {
             justify-start
 
             gap-8
-
+            lg:pt-32
     
           ">
 
