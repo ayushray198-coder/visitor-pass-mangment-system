@@ -12,7 +12,7 @@ export const checkInVisitor = async (req , res) =>{
 
         const pass = await Pass.findOne({
             passCode,
-            organizationId: req.orgId
+            organizationId: req.user.organizationId
         })
 
         if (!pass) {
@@ -32,7 +32,7 @@ export const checkInVisitor = async (req , res) =>{
             visitorId: pass.visitorId,
             checkInTime: new Date(),
             checkedInBy: req.user._id,
-            organizationId: req.orgId
+            organizationId: req.user.organizationId
         })
 
         pass.status = "used"
@@ -57,7 +57,7 @@ export const checkOutVisitor = async (req ,res) =>{
 
         const pass = await Pass.findOne({
             passCode,
-            organizationId: req.orgId
+            organizationId: req.user.organizationId
         })
 
         if (!pass) {
