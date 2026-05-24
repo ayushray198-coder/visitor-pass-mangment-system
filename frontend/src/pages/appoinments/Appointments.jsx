@@ -16,21 +16,25 @@ import {
 
 const Appointments = () => {
 
-  const [appointments,
-    setAppointments] =
-    useState([]);
+  const [
+    appointments,
+    setAppointments
+  ] = useState([]);
 
-  const [loading,
-    setLoading] =
-    useState(true);
+  const [
+    loading,
+    setLoading
+  ] = useState(true);
 
-  const [search,
-    setSearch] =
-    useState("");
+  const [
+    search,
+    setSearch
+  ] = useState("");
 
-  const [filter,
-    setFilter] =
-    useState("all");
+  const [
+    filter,
+    setFilter
+  ] = useState("all");
 
   const user = JSON.parse(
 
@@ -46,7 +50,7 @@ const Appointments = () => {
       "token"
     );
 
-  /* FETCH APPOINTMENTS */
+  /* FETCH */
 
   const fetchAppointments =
     async () => {
@@ -111,8 +115,6 @@ const Appointments = () => {
 
       try {
 
-        /* UPDATE STATUS */
-
         const response =
 
           await axiosInstance.patch(
@@ -130,7 +132,7 @@ const Appointments = () => {
 
           );
 
-        /* GENERATE PASS */
+        /* PASS GENERATE */
 
         if (
           status === "approved"
@@ -155,7 +157,7 @@ const Appointments = () => {
 
         }
 
-        /* GET UPDATED APPOINTMENTS */
+        /* REFRESH */
 
         const updatedAppointments =
 
@@ -189,7 +191,7 @@ const Appointments = () => {
           error.response?.data
             ?.message ||
 
-          "Failed to update appointment"
+          "Failed to update"
 
         );
 
@@ -197,7 +199,7 @@ const Appointments = () => {
 
     };
 
-  /* FILTERED APPOINTMENTS */
+  /* FILTER */
 
   const filteredAppointments =
 
@@ -270,7 +272,10 @@ const Appointments = () => {
 
       {/* HEADER */}
 
-      <div>
+      <GlassCard className="
+        p-6
+        rounded-[28px]
+      ">
 
         <h1 className="
           text-4xl
@@ -291,7 +296,7 @@ const Appointments = () => {
 
         </p>
 
-      </div>
+      </GlassCard>
 
       {/* SEARCH FILTER */}
 
@@ -380,7 +385,7 @@ const Appointments = () => {
         )
       }
 
-      {/* APPOINTMENTS */}
+      {/* LIST */}
 
       {
         filteredAppointments.map(
@@ -391,57 +396,141 @@ const Appointments = () => {
               key={appointment._id}
 
               className="
-                p-6
-                rounded-[28px]
+                p-5
+
+                rounded-[24px]
 
                 flex
                 flex-col
+
                 gap-6
               "
             >
+
+              {/* TOP */}
 
               <div className="
                 flex
                 flex-col
 
                 lg:flex-row
-                lg:items-center
+
+                lg:items-start
+
                 lg:justify-between
 
                 gap-5
               ">
 
-                <div>
+                {/* DETAILS */}
 
-                  <h2 className="
-                    text-2xl
-                    font-semibold
-                    text-white
-                  ">
+                <div className="
+                  flex
+                  flex-col
+                  gap-4
+                ">
 
-                    {
-                      appointment
-                        .visitor?.name ||
+                  <div>
 
-                      "Visitor"
-                    }
+                    <p className="
+                      text-xs
+                      text-slate-500
+                    ">
 
-                  </h2>
+                      Visitor Name
 
-                  <p className="
-                    text-slate-400
-                    mt-1
-                  ">
+                    </p>
 
-                    {
-                      appointment
-                        .visitor?.email ||
+                    <h2 className="
+                      text-xl
+                      font-semibold
+                      text-white
+                    ">
 
-                      appointment
-                        .organizationId?.name
-                    }
+                      {
+                        appointment
+                          .visitor?.name ||
 
-                  </p>
+                        "Visitor"
+                      }
+
+                    </h2>
+
+                  </div>
+
+                  <div>
+
+                    <p className="
+                      text-xs
+                      text-slate-500
+                    ">
+
+                      Email
+
+                    </p>
+
+                    <p className="
+                      text-slate-300
+                    ">
+
+                      {
+                        appointment
+                          .visitor?.email ||
+
+                        "No Email"
+                      }
+
+                    </p>
+
+                  </div>
+
+                  <div>
+
+                    <p className="
+                      text-xs
+                      text-slate-500
+                    ">
+
+                      Purpose
+
+                    </p>
+
+                    <p className="
+                      text-slate-300
+                    ">
+
+                      {
+                        appointment.purpose
+                      }
+
+                    </p>
+
+                  </div>
+
+                  <div>
+
+                    <p className="
+                      text-xs
+                      text-slate-500
+                    ">
+
+                      Visit Date
+
+                    </p>
+
+                    <p className="
+                      text-slate-300
+                    ">
+
+                      {
+                        new Date(
+                          appointment.visitDate
+                        ).toLocaleDateString()
+                      }
+
+                    </p>
+
+                  </div>
 
                 </div>
 
@@ -455,14 +544,20 @@ const Appointments = () => {
 
                       <div className="
                         h-[45px]
+
                         px-5
+
                         rounded-xl
+
                         bg-emerald-500/10
+
                         border
                         border-emerald-500/20
+
                         flex
                         items-center
                         gap-2
+
                         text-emerald-400
                       ">
 
@@ -481,14 +576,20 @@ const Appointments = () => {
 
                       <div className="
                         h-[45px]
+
                         px-5
+
                         rounded-xl
+
                         bg-red-500/10
+
                         border
                         border-red-500/20
+
                         flex
                         items-center
                         gap-2
+
                         text-red-400
                       ">
 
@@ -507,14 +608,20 @@ const Appointments = () => {
 
                       <div className="
                         h-[45px]
+
                         px-5
+
                         rounded-xl
+
                         bg-yellow-500/10
+
                         border
                         border-yellow-500/20
+
                         flex
                         items-center
                         gap-2
+
                         text-yellow-400
                       ">
 
@@ -531,62 +638,7 @@ const Appointments = () => {
 
               </div>
 
-              {/* PURPOSE */}
-
-              <div>
-
-                <h3 className="
-                  text-lg
-                  text-slate-300
-                  mb-2
-                ">
-
-                  Purpose
-
-                </h3>
-
-                <p className="
-                  text-slate-400
-                  leading-relaxed
-                ">
-
-                  {
-                    appointment.purpose
-                  }
-
-                </p>
-
-              </div>
-
-              {/* DATE */}
-
-              <div>
-
-                <h3 className="
-                  text-lg
-                  text-slate-300
-                ">
-
-                  Visit Date
-
-                </h3>
-
-                <p className="
-                  text-slate-400
-                  mt-1
-                ">
-
-                  {
-                    new Date(
-                      appointment.visitDate
-                    ).toLocaleDateString()
-                  }
-
-                </p>
-
-              </div>
-
-              {/* ACTION BUTTONS */}
+              {/* BUTTONS */}
 
               {
                 (
@@ -620,12 +672,17 @@ const Appointments = () => {
                       }
 
                       className="
-                        h-[55px]
-                        px-8
+                        h-[50px]
+
+                        px-7
+
                         rounded-2xl
+
                         bg-emerald-600
                         hover:bg-emerald-700
+
                         transition-all
+
                         text-white
                       "
                     >
@@ -644,12 +701,17 @@ const Appointments = () => {
                       }
 
                       className="
-                        h-[55px]
-                        px-8
+                        h-[50px]
+
+                        px-7
+
                         rounded-2xl
+
                         bg-red-600
                         hover:bg-red-700
+
                         transition-all
+
                         text-white
                       "
                     >
