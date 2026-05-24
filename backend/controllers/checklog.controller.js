@@ -40,6 +40,8 @@ export const checkInVisitor = async (req , res) =>{
 
         await pass.save()
 
+        console.log(log);
+        
         res.json({
             success: true,
             message: "Visitor checked in",
